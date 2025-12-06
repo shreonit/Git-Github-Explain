@@ -1,689 +1,1214 @@
-\# Git & GitHub -- A Complete, Detailed Guide (README)
-
-\> A beginner-friendly yet detailed explanation of \*\*Git\*\* and
-\*\*GitHub\*\* with commands, workflows, and best practices -- ready to
-use as a \`README.md\`.
-
-\-\--
-
-\## 📚 Table of Contents
-
-1\. \[Introduction\](#introduction) 2. \[What Is Version
-Control?\](#what-is-version-control)  - \[Why We Need Version
-Control\](#why-we-need-version-control)  - \[Types of Version Control
-Systems\](#types-of-version-control-systems) 3. \[What Is
-Git?\](#what-is-git)  - \[Key Features of Git\](#key-features-of-git)  -
-\[How Git Stores Data (Snapshots, Not
-Files)\](#how-git-stores-data-snapshots-not-files) 4. \[Git Core
-Concepts\](#git-core-concepts)  - \[Repository
-(Repo)\](#repository-repo)  - \[Working Directory / Working
-Tree\](#working-directory\--working-tree)  - \[Staging Area
-(Index)\](#staging-area-index)  - \[Commits\](#commits)  -
-\[Branches\](#branches)  - \[HEAD\](#head)  - \[Remote
-Repositories\](#remote-repositories) 5. \[Installing
-Git\](#installing-git)  - \[Check If Git Is
-Installed\](#check-if-git-is-installed)  - \[Basic Git
-Configuration\](#basic-git-configuration) 6. \[Creating & Initializing
-Repositories\](#creating\--initializing-repositories)  - \[\`git init\`
--- Start a Local Repo\](#git-init\--start-a-local-repo)  - \[\`git
-clone\` -- Copy an Existing Repo\](#git-clone\--copy-an-existing-repo)
-7. \[Everyday Git Workflow\](#everyday-git-workflow)  - \[The Typical
-Git Cycle\](#the-typical-git-cycle)  - \[Tracking & Ignoring
-Files\](#tracking\--ignoring-files)  - \[Viewing Status &
-History\](#viewing-status\--history) 8. \[Branching &
-Merging\](#branching\--merging)  - \[Why Use
-Branches?\](#why-use-branches)  - \[Working with
-Branches\](#working-with-branches)  - \[Fast-Forward vs Merge
-Commit\](#fast-forward-vs-merge-commit)  - \[Merge
-Conflicts\](#merge-conflicts) 9. \[Undoing Changes & Time
-Travel\](#undoing-changes\--time-travel)  - \[Amending
-Commits\](#amending-commits)  - \[Reset, Restore,
-Revert\](#reset-restore-revert) 10. \[What Is GitHub?\](#what-is-github)
- - \[Git vs GitHub\](#git-vs-github)  - \[Key GitHub
-Features\](#key-github-features) 11. \[Connecting Git with
-GitHub\](#connecting-git-with-github)  - \[Authenticating with HTTPS /
-SSH\](#authenticating-with-https\--ssh)  - \[Adding a
-Remote\](#adding-a-remote)  - \[Push, Pull, and
-Fetch\](#push-pull-and-fetch) 12. \[Forks, Pull Requests &
-Collaboration\](#forks-pull-requests\--collaboration)  - \[Forking a
-Repository\](#forking-a-repository)  - \[Pull Requests
-(PRs)\](#pull-requests-prs)  - \[Code Reviews &
-Discussions\](#code-reviews\--discussions) 13. \[GitHub Issues, Projects
-& Wiki\](#github-issues-projects\--wiki) 14. \[GitHub Actions (Brief
-Overview)\](#github-actions-brief-overview) 15. \[Useful Git Command
-Reference\](#useful-git-command-reference) 16. \[Common Git
-Workflows\](#common-git-workflows) 17. \[Common Mistakes & How to Fix
-Them\](#common-mistakes\--how-to-fix-them) 18. \[Best
-Practices\](#best-practices) 19. \[Glossary\](#glossary)
-
-\-\--
+# Git and GitHub: Complete Guide
 
-\## Introduction
+## Table of Contents
 
-\*\*Git\*\* is a distributed version control system that helps you track
-changes in your code, collaborate with others, and safely experiment
-with new ideas.
+1. [Introduction](#introduction)
+2. [What is Git?](#what-is-git)
+3. [What is GitHub?](#what-is-github)
+4. [Key Differences Between Git and GitHub](#key-differences-between-git-and-github)
+5. [Installing Git](#installing-git)
+6. [Git Configuration](#git-configuration)
+7. [Basic Git Concepts](#basic-git-concepts)
+8. [Git Commands Reference](#git-commands-reference)
+9. [Working with Branches](#working-with-branches)
+10. [Remote Repositories](#remote-repositories)
+11. [GitHub Features](#github-features)
+12. [Collaboration Workflow](#collaboration-workflow)
+13. [Best Practices](#best-practices)
+14. [Troubleshooting Common Issues](#troubleshooting-common-issues)
+15. [Advanced Git Topics](#advanced-git-topics)
+16. [Conclusion](#conclusion)
 
-\*\*GitHub\*\* is an online platform that hosts Git repositories and
-adds extra features like pull requests, issues, code reviews, and
-automation.
+---
 
-This document explains both \*\*Git\*\* and \*\*GitHub\*\* in detail,
-step by step, with examples and commands you can run directly in your
-terminal.
+## Introduction
 
-\-\--
+Version control is essential for modern software development. It allows developers to track changes, collaborate effectively, and maintain a complete history of their project. Git is the most popular version control system in the world, and GitHub is the leading platform for hosting Git repositories and collaborating on code.
 
-\## What Is Version Control?
+This comprehensive guide covers everything you need to know about Git and GitHub, from basic concepts to advanced workflows.
 
-Version control is a system that records changes to files over time so
-you can:
+---
 
-\- Go back to earlier versions - See who made which change and why -
-Work with other people on the same project without overwriting each
-other's work
+## What is Git?
 
-\### Why We Need Version Control
+Git is a **distributed version control system** created by Linus Torvalds in 2005. It allows developers to track changes in their code, collaborate with others, and maintain different versions of their projects.
 
-Without version control, people often do things like:
+### Key Features of Git
 
-\- \`final_project.cpp\` - \`final_project_new.cpp\` -
-\`final_project_new_final.cpp\` -
-\`final_project_final_really_final.cpp\`
+- **Distributed Architecture**: Every developer has a complete copy of the repository history
+- **Speed**: Git operations are performed locally, making them extremely fast
+- **Branching and Merging**: Create isolated development environments easily
+- **Data Integrity**: Every file and commit is checksummed using SHA-1 hash
+- **Staging Area**: Review changes before committing them
+- **Free and Open Source**: Available for everyone to use and modify
 
-This quickly becomes confusing.
+### Why Use Git?
 
-Version control solves these problems by giving you:
+- Track every change made to your project
+- Revert to previous versions when needed
+- Work on multiple features simultaneously using branches
+- Collaborate with team members without conflicts
+- Maintain a complete audit trail of your project
+- Work offline and sync changes later
 
-\- \*\*History\*\* -- Who changed what and when - \*\*Backup\*\* -- You
-can restore old versions - \*\*Collaboration\*\* -- Multiple people can
-work together - \*\*Branching\*\* -- Experiment without breaking the
-main code
+---
 
-\### Types of Version Control Systems
+## What is GitHub?
 
-\| Type \| Description \| Example \|
-\|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--\|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--\|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--\|
-\| Local Version Control \| All history stored on one computer \| RCS
-(older tool) \| \| Centralized (CVCS) \| Single central server for all
-versions \| Subversion (SVN) \| \| Distributed (DVCS) \| Every user has
-a full copy of the repo & history \| \*\*Git\*\*, Mercurial \|
+GitHub is a **cloud-based hosting service** for Git repositories. It was founded in 2008 and acquired by Microsoft in 2018. GitHub provides a web-based interface for Git repositories along with additional collaboration features.
 
-Git is a \*\*Distributed Version Control System (DVCS)\*\*, which makes
-it powerful, fast, and more reliable.
+### Key Features of GitHub
 
-\-\--
+- **Repository Hosting**: Store unlimited public and private repositories
+- **Collaboration Tools**: Pull requests, code reviews, and issue tracking
+- **Social Coding**: Follow developers, star repositories, and fork projects
+- **GitHub Actions**: Automate workflows with CI/CD pipelines
+- **GitHub Pages**: Host static websites directly from repositories
+- **Project Management**: Kanban boards, milestones, and project tracking
+- **Security Features**: Vulnerability scanning, Dependabot, and secret scanning
+- **Documentation**: Built-in wiki and README rendering
 
-\## What Is Git?
+### GitHub Alternatives
 
-\*\*Git\*\* is a free, open-source, distributed version control system
-created by Linus Torvalds (the creator of Linux) in 2005.
+While GitHub is the most popular, other Git hosting platforms include:
 
-It is designed to be:
+- **GitLab**: Offers built-in CI/CD and DevOps features
+- **Bitbucket**: Integrates well with Atlassian tools
+- **Gitea**: Self-hosted, lightweight option
+- **SourceForge**: One of the oldest hosting platforms
 
-\- \*\*Fast\*\* - \*\*Secure\*\* - \*\*Reliable\*\* -
-\*\*Distributed\*\*
+---
 
-\### Key Features of Git
+## Key Differences Between Git and GitHub
 
-\- \*\*Distributed\*\* -- Every developer has the complete repo,
-including history. - \*\*Branching and merging\*\* -- Lightweight
-branches make experimentation easy. - \*\*Efficient storage\*\* -- Uses
-snapshots and compression. - \*\*Integrity\*\* -- Every commit is
-checksummed with SHA-1 (a cryptographic hash). - \*\*Staging area\*\* --
-You can choose which changes to include in each commit.
+| Feature | Git | GitHub |
+|---------|-----|--------|
+| Type | Version control system (software) | Hosting service (platform) |
+| Installation | Installed locally on your computer | Cloud-based, accessed via browser |
+| Purpose | Track and manage code changes | Host repositories and facilitate collaboration |
+| Usage | Command-line or GUI tools | Web interface with additional features |
+| Cost | Free and open source | Free tier with paid plans for advanced features |
+| Offline Work | Works completely offline | Requires internet connection |
+| Collaboration | Basic (local sharing) | Advanced (pull requests, issues, discussions) |
 
-\### How Git Stores Data (Snapshots, Not Files)
+---
 
-Most systems store changes as \*\*differences (deltas)\*\*.
+## Installing Git
 
-Git thinks differently:
+### Windows
 
-\- Each time you commit, Git records a \*\*snapshot\*\* of your entire
-project. - If files haven't changed, Git doesn't duplicate them, it just
-points to the previous identical file.
+1. Download the installer from [git-scm.com](https://git-scm.com)
+2. Run the executable file
+3. Follow the installation wizard (recommended: use default settings)
+4. Verify installation by opening Command Prompt and typing: `git --version`
 
-This makes Git efficient and powerful for branching and merging.
+### macOS
 
-\-\--
+**Option 1: Using Homebrew**
+```bash
+brew install git
+```
 
-\## Git Core Concepts
+**Option 2: Using Xcode Command Line Tools**
+```bash
+xcode-select --install
+```
 
-\### Repository (Repo)
+**Option 3: Download installer from git-scm.com**
 
-A \*\*Git repository\*\* is a project folder where Git tracks changes.
+### Linux
 
-\- It contains your files, plus a hidden \`.git\` folder where Git
-stores all its data.
+**Debian/Ubuntu:**
+```bash
+sudo apt update
+sudo apt install git
+```
 
-Two types:
+**Fedora:**
+```bash
+sudo dnf install git
+```
 
-\- \*\*Local repository\*\* -- On your machine. - \*\*Remote
-repository\*\* -- On a server (like GitHub).
+**Arch Linux:**
+```bash
+sudo pacman -S git
+```
 
-\-\--
+### Verify Installation
 
-\### Working Directory / Working Tree
+```bash
+git --version
+```
 
-The \*\*working directory\*\* is the actual folder where your files live
-and where you edit them.
+You should see output like: `git version 2.40.0`
 
-\- These are the files you see and modify. - Changes in the working
-directory are \*\*not yet\*\* tracked until you add and commit them.
+---
 
-\-\--
+## Git Configuration
 
-\### Staging Area (Index)
+After installing Git, configure your identity. This information is used in every commit.
 
-The \*\*staging area\*\* (also called \*\*index\*\*) is a middle area
-where you prepare changes before committing them.
+### Basic Configuration
 
-Flow:
+```bash
+# Set your name
+git config --global user.name "Your Name"
 
-1\. Edit file → It lives in the \*\*working directory\*\*. 2. Stage file
-(\`git add\`) → It moves into the \*\*staging area\*\*. 3. Commit (\`git
-commit\`) → It becomes a \*\*commit\*\* in the repository's history.
+# Set your email
+git config --global user.email "your.email@example.com"
 
-\-\--
+# Set default branch name to 'main'
+git config --global init.defaultBranch main
 
-\### Commits
+# Set default editor (optional)
+git config --global core.editor "code --wait"  # For VS Code
+git config --global core.editor "vim"          # For Vim
+```
 
-A \*\*commit\*\* is a snapshot of your project at a specific point in
-time.
+### View Configuration
 
-Each commit has:
+```bash
+# View all configuration
+git config --list
 
-\- A unique \*\*hash\*\* (like \`6f1a9ac\...\`) - Author name and
-email - Date and time - Commit message (description of change) - Pointer
-to parent commit(s)
+# View specific configuration
+git config user.name
+git config user.email
+```
 
-Example command:
+### Configuration Levels
 
-\`\`\`bash git commit -m \"Add login form validation\" Branches A branch
-is simply a movable pointer to a commit.
+Git has three configuration levels:
 
-The default branch is often called main or master.
+1. **System** (`--system`): Applies to all users on the system
+2. **Global** (`--global`): Applies to all repositories for current user
+3. **Local** (`--local`): Applies only to current repository (default)
 
-Each branch represents a separate line of development.
+### Useful Configuration Options
 
-You can create branches for features, bug fixes, experiments, etc.
+```bash
+# Enable color output
+git config --global color.ui auto
 
-HEAD HEAD is a special pointer that usually points to the current
-branch, and therefore indirectly to the latest commit on that branch.
+# Set up aliases
+git config --global alias.st status
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
 
-When you commit, your branch pointer moves forward, and HEAD moves with
-it.
+# Configure line endings
+git config --global core.autocrlf input    # For macOS/Linux
+git config --global core.autocrlf true     # For Windows
+```
 
-When you checkout another branch, HEAD points to that branch.
+---
 
-Remote Repositories A remote is a version of your repo that is hosted
-somewhere else (e.g., GitHub).
+## Basic Git Concepts
 
-Common remote name:
+### Repository (Repo)
 
-origin -- default name for the main remote repository.
+A repository is a directory that contains your project files and the complete history of all changes. It includes a hidden `.git` folder that stores all version control information.
 
-You push your local commits to the remote, and pull changes from remote
-to local.
+### Commit
 
-Installing Git Check If Git Is Installed Open a terminal (Command
-Prompt, PowerShell, Git Bash, etc.) and run:
+A commit is a snapshot of your repository at a specific point in time. Each commit has:
+- A unique SHA-1 hash identifier
+- Author information
+- Timestamp
+- Commit message describing the changes
+- Reference to parent commit(s)
 
-bash Copy code git \--version If you see a version number (e.g., git
-version 2.45.0), Git is installed.
+### Working Directory
 
-If not, download Git from the official site: https://git-scm.com
+The working directory is where you modify files. It contains the current version of your project files.
 
-Basic Git Configuration After installing Git, set your identity so it
-appears in commits:
+### Staging Area (Index)
 
-bash Copy code git config \--global user.name \"Your Name\" git config
-\--global user.email \"youremail@example.com\" Optional but useful
-settings:
+The staging area is an intermediate area where you prepare changes before committing them. It allows you to selectively choose which changes to include in the next commit.
 
-bash Copy code \# Colored output git config \--global color.ui auto
+### Branch
 
-\# Set default branch name for new repos (e.g., main) git config
-\--global init.defaultBranch main To view your config:
+A branch is a parallel version of your repository. It allows you to work on different features or fixes without affecting the main codebase.
 
-bash Copy code git config \--list Creating & Initializing Repositories
-git init -- Start a Local Repo Use this when you want to start version
-control for an existing or new project.
+### HEAD
 
-bash Copy code \# Create a project folder mkdir my-project cd my-project
+HEAD is a pointer that refers to the current branch or commit you're working on. It typically points to the tip of the current branch.
 
-\# Initialize a git repository git init This creates a .git folder
-inside my-project, making it a Git repository.
+### Remote
 
-Now you can start adding files, staging, and committing.
+A remote is a version of your repository hosted on a server (like GitHub). You can push changes to and pull changes from remotes.
 
-git clone -- Copy an Existing Repo Use this when you want to copy a
-remote repository (e.g., from GitHub) to your local machine.
+### The Three States of Git
 
-bash Copy code git clone https://github.com/username/repository-name.git
-This will:
+1. **Modified**: You have changed files but haven't committed them yet
+2. **Staged**: You have marked modified files to go into the next commit
+3. **Committed**: The changes are safely stored in your local repository
 
-Create a folder named repository-name
+---
 
-Initialize a Git repo inside it
+## Git Commands Reference
 
-Set up a remote named origin
+### Initializing and Cloning
 
-Download all commit history and files
+```bash
+# Initialize a new Git repository
+git init
 
-You can also specify a folder name:
+# Clone an existing repository
+git clone <repository-url>
 
-bash Copy code git clone https://github.com/username/repository-name.git
-my-folder Everyday Git Workflow The Typical Git Cycle The basic steps in
-a normal Git workflow:
+# Clone with a different directory name
+git clone <repository-url> <directory-name>
 
-Edit files in your editor/IDE.
+# Clone a specific branch
+git clone -b <branch-name> <repository-url>
+```
 
-Check status with git status.
+### Basic Workflow
 
-Stage changed files with git add.
+```bash
+# Check status of your repository
+git status
 
-Commit staged changes with git commit.
+# Add files to staging area
+git add <file-name>
+git add .                    # Add all files
+git add *.js                 # Add all JavaScript files
+git add src/                 # Add entire directory
 
-Push them to a remote (GitHub) with git push (if using remotes).
+# Remove files from staging area
+git reset <file-name>
+git reset                    # Unstage all files
 
-Simplified diagram:
+# Commit changes
+git commit -m "Commit message"
+git commit -am "Message"     # Add and commit in one step (tracked files only)
 
-text Copy code Working Directory → git add → Staging Area → git commit →
-Repository → git push → Remote (GitHub) Tracking & Ignoring Files To
-tell Git to track new files:
+# View commit history
+git log
+git log --oneline            # Compact view
+git log --graph              # Show branch structure
+git log --all --decorate --oneline --graph  # Detailed graph view
+```
 
-bash Copy code git add filename.ext git add foldername/ git add . \# Add
-all changed files in the current directory Some files should not be
-tracked (e.g., build files, logs, secrets).
+### Viewing Changes
 
-You can ignore them using .gitignore.
+```bash
+# View unstaged changes
+git diff
 
-Example .gitignore:
+# View staged changes
+git diff --staged
 
-gitignore Copy code \# Node.js node_modules/
+# View changes in a specific file
+git diff <file-name>
 
-\# Python \_\_pycache\_\_/ \*.pyc
+# Compare branches
+git diff <branch1> <branch2>
 
-\# Logs \*.log
+# Show commit details
+git show <commit-hash>
+```
 
-\# OS files .DS_Store Thumbs.db Viewing Status & History Check what's
-going on in your repo:
+### Undoing Changes
 
-bash Copy code \# Show changed, staged, and untracked files git status
-View commit history:
+```bash
+# Discard changes in working directory
+git checkout -- <file-name>
+git restore <file-name>      # Newer syntax
 
-bash Copy code git log More compact view:
+# Unstage files
+git reset HEAD <file-name>
+git restore --staged <file-name>  # Newer syntax
 
-bash Copy code git log \--oneline View history with graph (branches):
+# Amend last commit
+git commit --amend -m "New message"
 
-bash Copy code git log \--oneline \--graph \--all Branching & Merging
-Why Use Branches? Branches let you:
+# Revert a commit (creates new commit)
+git revert <commit-hash>
 
-Work on new features without touching the main branch
+# Reset to a previous commit
+git reset --soft <commit-hash>   # Keep changes staged
+git reset --mixed <commit-hash>  # Keep changes unstaged (default)
+git reset --hard <commit-hash>   # Discard all changes (dangerous!)
+```
 
-Fix bugs independently
+### Branch Management
 
-Experiment safely
+```bash
+# List branches
+git branch                   # Local branches
+git branch -r                # Remote branches
+git branch -a                # All branches
 
-Run multiple tasks in parallel
+# Create a new branch
+git branch <branch-name>
 
-Working with Branches Create a new branch:
+# Switch to a branch
+git checkout <branch-name>
+git switch <branch-name>     # Newer syntax
 
-bash Copy code git branch feature/login-page Switch to a branch:
+# Create and switch to a new branch
+git checkout -b <branch-name>
+git switch -c <branch-name>  # Newer syntax
 
-bash Copy code git checkout feature/login-page \# or, modern way: git
-switch feature/login-page Create and switch in one command:
+# Rename a branch
+git branch -m <old-name> <new-name>
+git branch -m <new-name>     # Rename current branch
 
-bash Copy code git checkout -b feature/login-page \# or: git switch -c
-feature/login-page List all branches:
+# Delete a branch
+git branch -d <branch-name>  # Safe delete (merged only)
+git branch -D <branch-name>  # Force delete
 
-bash Copy code git branch Delete a branch (after merging):
+# Merge branches
+git merge <branch-name>
 
-bash Copy code git branch -d feature/login-page \# safe delete (won't
-delete if unmerged) git branch -D feature/login-page \# force delete
-Fast-Forward vs Merge Commit When you merge a branch into another, two
-main cases occur:
+# Rebase current branch
+git rebase <branch-name>
+```
 
-Fast-forward merge
+### Remote Operations
 
-The target branch can simply move forward to the commit of the feature
-branch.
+```bash
+# View remote repositories
+git remote
+git remote -v                # Show URLs
 
-No new merge commit is created.
+# Add a remote
+git remote add <name> <url>
+git remote add origin https://github.com/user/repo.git
 
-bash Copy code git checkout main git merge feature/login-page Merge
-commit
+# Remove a remote
+git remote remove <name>
 
-If both branches have new commits, Git creates a new commit that
-combines them.
+# Rename a remote
+git remote rename <old-name> <new-name>
 
-bash Copy code git checkout main git merge feature/another-feature Merge
-Conflicts A merge conflict occurs when Git cannot automatically combine
-changes.
+# Fetch changes from remote
+git fetch <remote>
+git fetch origin
 
-Example:
+# Pull changes (fetch + merge)
+git pull <remote> <branch>
+git pull origin main
 
-You edited the same line in the same file in two different branches.
+# Push changes to remote
+git push <remote> <branch>
+git push origin main
+git push -u origin main      # Set upstream and push
 
-Git will mark the conflict in the file:
+# Push all branches
+git push --all origin
 
-text Copy code \<\<\<\<\<\<\< HEAD Current branch content =======
-Incoming branch content \>\>\>\>\>\>\> feature-branch To resolve:
+# Delete remote branch
+git push origin --delete <branch-name>
+```
 
-Manually edit the file and keep the correct content.
+### Stashing
 
-Stage the resolved file:
+```bash
+# Save changes temporarily
+git stash
+git stash save "Message"
 
-bash Copy code git add conflicted-file.txt Complete the merge:
+# List stashes
+git stash list
 
-bash Copy code git commit Undoing Changes & Time Travel Amending Commits
-Fix the last commit (e.g., to change message or add missed files):
+# Apply most recent stash
+git stash apply
+git stash pop                # Apply and remove
 
-bash Copy code \# Stage new changes git add file-you-forgot.txt
+# Apply specific stash
+git stash apply stash@{2}
 
-\# Amend last commit git commit \--amend This rewrites the last commit.
-Avoid amending commits that are already pushed to a shared remote.
+# Show stash changes
+git stash show
+git stash show -p            # Show diff
 
-Reset, Restore, Revert These three commands are often confusing:
+# Delete stash
+git stash drop stash@{0}
+git stash clear              # Delete all stashes
+```
 
-Command Affects History? Use Case git restore No Undo changes in working
-directory/staging git reset Yes (some modes) Move branch pointer (and
-optionally working tree) git revert No (safe) Create a new commit that
-undoes changes of a commit
+### Tags
 
-git restore examples:
+```bash
+# List tags
+git tag
 
-bash Copy code \# Discard local changes in a file (back to last commit)
-git restore filename.txt
+# Create lightweight tag
+git tag <tag-name>
 
-\# Unstage a file (keep changes in working directory) git restore
-\--staged filename.txt git reset examples (be careful):
+# Create annotated tag
+git tag -a v1.0.0 -m "Version 1.0.0"
 
-bash Copy code \# Move branch pointer back one commit but keep changes
-git reset \--soft HEAD\~1
+# Tag specific commit
+git tag <tag-name> <commit-hash>
 
-\# Move branch pointer and reset staging area (keep working directory)
-git reset \--mixed HEAD\~1
+# Show tag details
+git show <tag-name>
 
-\# Hard reset: remove commit + changes (dangerous) git reset \--hard
-HEAD\~1 git revert example (safe):
+# Push tags to remote
+git push origin <tag-name>
+git push origin --tags       # Push all tags
 
-bash Copy code \# Undo a specific commit by creating a new commit git
-revert \<commit-hash\> What Is GitHub? GitHub is a web-based platform
-that hosts Git repositories and provides tools for:
+# Delete tag
+git tag -d <tag-name>        # Delete local
+git push origin --delete <tag-name>  # Delete remote
+```
 
-Collaboration
+---
 
-Code review
+## Working with Branches
 
-Project management
+### Branch Strategy
 
-Automation (CI/CD)
+Branches allow you to develop features, fix bugs, or experiment with new ideas in isolated environments.
 
-You can think of:
+### Common Branching Models
 
-Git = engine for version control
+**1. Git Flow**
+- `main`: Production-ready code
+- `develop`: Integration branch for features
+- `feature/*`: New features
+- `release/*`: Release preparation
+- `hotfix/*`: Emergency production fixes
 
-GitHub = website that uses Git + adds features
+**2. GitHub Flow**
+- `main`: Always deployable
+- Feature branches: Created from and merged back to main
+- Simple and suitable for continuous deployment
 
-Git vs GitHub Aspect Git GitHub Type Tool (VCS) Platform / Service
-Location Installed on your machine Hosted on servers (cloud) Purpose
-Track changes locally & remotely Host repos, collaboration, tooling
-Required? Can use Git without GitHub GitHub uses Git behind the scenes
+**3. GitLab Flow**
+- Combines feature-driven development with issue tracking
+- Environment branches: `production`, `staging`, `development`
 
-Key GitHub Features Remote repositories -- Host your code online.
+### Branch Best Practices
 
-Pull requests -- Propose changes to a repo.
+1. **Use descriptive names**: `feature/user-authentication`, `bugfix/login-error`
+2. **Keep branches short-lived**: Merge frequently to avoid conflicts
+3. **One branch per feature**: Don't mix unrelated changes
+4. **Delete merged branches**: Keep repository clean
+5. **Regularly sync with main**: Prevent merge conflicts
 
-Issues -- Track bugs, tasks, and enhancements.
+### Merging Strategies
 
-Projects/Boards -- Kanban-style project management.
+**Fast-Forward Merge**
+```bash
+git merge feature-branch
+```
+Moves the branch pointer forward (no merge commit).
 
-Wiki -- Documentation area.
+**Three-Way Merge**
+```bash
+git merge --no-ff feature-branch
+```
+Creates a merge commit even if fast-forward is possible.
 
-Actions -- Automate builds, tests, deployments.
+**Squash Merge**
+```bash
+git merge --squash feature-branch
+git commit -m "Add feature"
+```
+Combines all commits into one before merging.
 
-Releases -- Package versions of your software.
+### Handling Merge Conflicts
 
-Gists -- Share small code snippets.
+When Git cannot automatically merge changes:
 
-Connecting Git with GitHub Authenticating with HTTPS / SSH Two common
-ways to connect:
+1. Git marks conflicts in files:
+```
+<<<<<<< HEAD
+Your changes
+=======
+Their changes
+>>>>>>> branch-name
+```
 
-HTTPS
+2. Edit files to resolve conflicts
+3. Remove conflict markers
+4. Stage resolved files: `git add <file>`
+5. Complete merge: `git commit`
 
-Uses username + password or token.
+### Rebasing
 
-Recommended now: use Personal Access Token (PAT) instead of password.
+Rebasing rewrites commit history by moving or combining commits.
 
-SSH
+```bash
+# Rebase current branch onto main
+git checkout feature-branch
+git rebase main
 
-Uses SSH keys (public/private key pair).
+# Interactive rebase (edit history)
+git rebase -i HEAD~3
+```
 
-More convenient once set up (no password each time).
+**When to Rebase:**
+- Clean up local commits before pushing
+- Keep linear history
+- Update feature branch with latest main
 
-Basic SSH setup overview:
+**When NOT to Rebase:**
+- Never rebase public/shared commits
+- Can cause conflicts for collaborators
 
-bash Copy code \# Generate a new SSH key ssh-keygen -t ed25519 -C
-\"youremail@example.com\"
+---
 
-\# Start ssh-agent and add key (depending on OS) ssh-add
-\~/.ssh/id_ed25519
+## Remote Repositories
 
-\# Copy public key and add it to GitHub (Settings → SSH keys) cat
-\~/.ssh/id_ed25519.pub Adding a Remote After you create a repo on
-GitHub, you'll get a URL (HTTPS or SSH).
+### Understanding Remotes
 
-Add it as a remote:
+A remote repository is a version of your project hosted on a server. Common scenarios:
 
-bash Copy code \# Inside your local repo git remote add origin
-https://github.com/username/repo-name.git \# or (SSH) git remote add
-origin git@github.com:username/repo-name.git Check remotes:
+- **Origin**: The default name for the remote you cloned from
+- **Upstream**: The original repository you forked from
+- **Multiple remotes**: Work with multiple servers
 
-bash Copy code git remote -v Push, Pull, and Fetch Push local commits to
-remote:
+### Working with GitHub Remotes
 
-bash Copy code git push origin main First push for a new branch:
+```bash
+# Add GitHub remote
+git remote add origin https://github.com/username/repo.git
 
-bash Copy code git push -u origin my-branch Pull = fetch + merge:
+# Verify remote
+git remote -v
 
-bash Copy code git pull origin main Fetch only (download changes but
-don't merge):
+# Push to GitHub
+git push -u origin main
 
-bash Copy code git fetch origin Then inspect and merge manually if you
-want.
+# Pull from GitHub
+git pull origin main
+```
 
-Forks, Pull Requests & Collaboration Forking a Repository A fork is a
-copy of someone else's repository under your account.
+### Authentication Methods
 
-Use fork when:
+**1. HTTPS (Personal Access Token)**
+```bash
+git clone https://github.com/username/repo.git
+# Use token as password when prompted
+```
 
-You don't have write access to the original repo.
+**2. SSH**
+```bash
+# Generate SSH key
+ssh-keygen -t ed25519 -C "your.email@example.com"
 
-You want to propose changes via Pull Request.
+# Add key to ssh-agent
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
 
-Basic flow:
+# Clone with SSH
+git clone git@github.com:username/repo.git
+```
 
-Click Fork on GitHub.
+### Forking and Pull Requests
 
-Clone your fork.
+**Forking Workflow:**
 
-Create a new branch.
+1. Fork repository on GitHub (creates your copy)
+2. Clone your fork locally
+```bash
+git clone https://github.com/your-username/repo.git
+```
 
-Make changes, commit, push.
+3. Add upstream remote
+```bash
+git remote add upstream https://github.com/original-owner/repo.git
+```
 
-Open a Pull Request back to the original repo.
+4. Create feature branch and make changes
+```bash
+git checkout -b feature-branch
+# Make changes
+git commit -am "Add feature"
+```
 
-Pull Requests (PRs) A Pull Request is a GitHub feature to propose
-changes.
+5. Push to your fork
+```bash
+git push origin feature-branch
+```
 
-It allows:
+6. Create Pull Request on GitHub
 
-Discussion and review
+7. Sync with upstream
+```bash
+git fetch upstream
+git checkout main
+git merge upstream/main
+git push origin main
+```
 
-Inline comments on code
+---
 
-CI checks (tests, linters)
+## GitHub Features
 
-Eventually, merging into the target branch
+### Repositories
 
-Typical PR workflow:
+**Creating a Repository:**
+1. Click "New" on GitHub
+2. Choose name, description, and visibility
+3. Initialize with README (optional)
+4. Add .gitignore and license (optional)
 
-text Copy code Fork → Clone → Branch → Commit → Push → Open PR → Review
-→ Merge Code Reviews & Discussions Within a PR, developers can:
+**Repository Settings:**
+- Collaborators and teams
+- Branch protection rules
+- Webhooks and integrations
+- Deploy keys
 
-Comment on specific lines of code
+### Pull Requests (PRs)
 
-Request changes
+Pull Requests are proposals to merge changes from one branch to another.
 
-Approve the PR
+**Creating a Pull Request:**
+1. Push your branch to GitHub
+2. Click "Pull Request" button
+3. Select base and compare branches
+4. Add title and description
+5. Request reviewers
+6. Submit for review
 
-Link issues (e.g., \"Fixes #123\")
+**Pull Request Features:**
+- Code review and comments
+- Inline discussions
+- Automated checks (CI/CD)
+- Approval workflows
+- Merge strategies
 
-Code review helps maintain code quality, consistency, and knowledge
-sharing.
+### Issues
 
-GitHub Issues, Projects & Wiki Issues
+Issues are used to track bugs, enhancements, and tasks.
 
-Used to track bugs, enhancements, questions, tasks.
+**Creating an Issue:**
+1. Go to "Issues" tab
+2. Click "New Issue"
+3. Add title and description
+4. Assign labels, milestones, and assignees
 
-Can be labeled (bug, feature, documentation, etc.).
+**Issue Features:**
+- Labels (bug, enhancement, documentation)
+- Milestones (group related issues)
+- Assignees (who's working on it)
+- Projects (Kanban boards)
+- Templates (standardize issue creation)
 
-Can be assigned to people and linked to PRs.
+### GitHub Actions
 
-Projects
+Automate workflows with GitHub Actions (CI/CD, testing, deployment).
 
-Kanban-style boards for task management.
+**Example Workflow (.github/workflows/ci.yml):**
+```yaml
+name: CI
 
-Helps plan work, sprints, and releases.
+on: [push, pull_request]
 
-Wiki
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run tests
+      run: npm test
+```
 
-Documentation section for your project.
+### GitHub Pages
 
-Good for guides, architecture docs, usage instructions.
+Host static websites directly from repositories.
 
-GitHub Actions (Brief Overview) GitHub Actions is GitHub's CI/CD
-platform.
+**Enabling GitHub Pages:**
+1. Go to repository Settings
+2. Navigate to "Pages"
+3. Select source branch (usually `main` or `gh-pages`)
+4. Your site will be at `https://username.github.io/repo-name`
 
-You can:
+### Wiki
 
-Run tests automatically on each push or PR.
+Built-in wiki for project documentation.
 
-Build and deploy applications.
+### Projects
 
-Automate repetitive tasks (linting, formatting, etc.).
+Kanban-style project management boards to organize issues and pull requests.
 
-Configuration is done via YAML files inside .github/workflows/.
+### Security Features
 
-Example minimal workflow (just conceptual):
+- **Dependabot**: Automatic dependency updates
+- **Security Advisories**: Private vulnerability reporting
+- **Code Scanning**: Detect vulnerabilities in code
+- **Secret Scanning**: Find exposed credentials
 
-yaml Copy code name: CI
+---
 
-on: push: branches: \[ \"main\" \] pull_request: branches: \[ \"main\"
-\]
+## Collaboration Workflow
 
-jobs: build: runs-on: ubuntu-latest steps:  - uses: actions/checkout@v4
- - name: Run tests run: echo \"Here you would run your test commands\"
-Useful Git Command Reference Basic Commands Command Description git init
-Initialize a new Git repository git clone \<url\> Clone a remote
-repository git status Show status of working directory and staging area
-git add \<file\> Stage a specific file git add . Stage all changed/added
-files git commit -m \"message\" Commit staged changes with a message git
-log Show commit history git log \--oneline Show compact commit history
+### Team Collaboration Best Practices
 
-Branching & Merging Command Description git branch List local branches
-git branch \<name\> Create a new branch git switch \<name\> / git
-checkout \<name\> Switch to a branch git switch -c \<name\> / git
-checkout -b \<name\> Create and switch to a new branch git merge
-\<branch\> Merge a branch into current branch git branch -d \<name\>
-Delete a branch (if merged)
+**1. Repository Setup**
+- Create clear README with project overview
+- Add CONTRIBUTING.md with guidelines
+- Include LICENSE file
+- Set up .gitignore
 
-Remote Operations Command Description git remote -v List remotes git
-remote add origin \<url\> Add a remote named origin git push origin
-\<branch\> Push branch to remote git push -u origin \<branch\> Push and
-set upstream tracking git pull origin \<branch\> Fetch and merge from
-remote git fetch origin Only fetch changes from remote
+**2. Branch Protection**
+- Require pull request reviews
+- Require status checks to pass
+- Enforce linear history
+- Restrict who can push to main
 
-Undoing & Cleaning Up Command Description git restore \<file\> Discard
-local changes in file git restore \--staged \<file\> Unstage file, keep
-changes git reset \--soft HEAD\~1 Move HEAD back one commit, keep
-changes staged git reset \--hard HEAD\~1 Remove last commit and changes
-(dangerous) git revert \<commit\> Create a new commit that undoes
-specified commit
+**3. Code Review Process**
+- Review code promptly
+- Provide constructive feedback
+- Approve when ready
+- Request changes if needed
 
-Common Git Workflows Solo Developer with GitHub Create repo on GitHub.
+**4. Communication**
+- Write clear commit messages
+- Provide detailed PR descriptions
+- Comment on specific code lines
+- Use issue references (#123)
 
-Clone it locally:
+### Commit Message Conventions
 
-bash Copy code git clone https://github.com/username/repo.git Work:
+**Good Commit Messages:**
+```
+feat: add user authentication
+fix: resolve login timeout issue
+docs: update API documentation
+style: format code with prettier
+refactor: simplify database queries
+test: add unit tests for payment module
+chore: update dependencies
+```
 
-bash Copy code git add . git commit -m \"Your message\" git push origin
-main Feature Branch Workflow (Recommended) Start from main:
+**Conventional Commits Format:**
+```
+<type>(<scope>): <subject>
 
-bash Copy code git checkout main git pull origin main Create a feature
-branch:
+<body>
 
-bash Copy code git switch -c feature/new-ui Work and commit:
+<footer>
+```
 
-bash Copy code git add . git commit -m \"Implement new UI layout\" Push
-branch:
+**Types:**
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation changes
+- `style`: Code style changes (formatting)
+- `refactor`: Code refactoring
+- `test`: Adding or updating tests
+- `chore`: Maintenance tasks
 
-bash Copy code git push -u origin feature/new-ui Open Pull Request on
-GitHub, review, and merge.
+### Pull Request Template
 
-Common Mistakes & How to Fix Them 1. Committed to the Wrong Branch You
-made commits on main instead of feature:
+Create `.github/pull_request_template.md`:
 
-bash Copy code \# Create feature branch from current state git branch
-feature/new-feature
+```markdown
+## Description
+Brief description of changes
 
-\# Move main back one commit (or more) git checkout main git reset
-\--hard HEAD\~1 (Be careful if already pushed. Instead, use git revert.)
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
+- [ ] Documentation update
 
-2\. Pushed Secrets (Passwords, Tokens) Immediately revoke the secret
-(API token, password, etc.).
+## Testing
+How have you tested this?
 
-Remove it from the code.
+## Checklist
+- [ ] Code follows style guidelines
+- [ ] Self-review completed
+- [ ] Comments added for complex code
+- [ ] Documentation updated
+- [ ] No new warnings generated
+- [ ] Tests added/updated
+- [ ] All tests pass
+```
 
-Consider using tools like git filter-repo or GitHub's secret scanning.
+---
 
-Never commit secrets again; use environment variables or config files
-ignored by Git.
+## Best Practices
 
-3\. "Detached HEAD" State Happens when you checkout a commit hash
-instead of a branch.
+### General Best Practices
 
-If you want to keep the work, create a new branch:
+1. **Commit Often**: Make small, focused commits
+2. **Write Meaningful Messages**: Describe what and why, not how
+3. **Use Branches**: Never commit directly to main
+4. **Pull Before Push**: Stay synced with remote
+5. **Review Before Committing**: Use `git diff` and `git status`
+6. **Keep Commits Atomic**: One logical change per commit
+7. **Don't Commit Generated Files**: Use .gitignore
+8. **Test Before Committing**: Ensure code works
+9. **Document Your Code**: Update README and comments
+10. **Be Consistent**: Follow team conventions
 
-bash Copy code git switch -c my-temporary-branch Best Practices Commit
-often, but with meaningful messages.
+### .gitignore Best Practices
 
-Use feature branches instead of committing directly to main.
+The `.gitignore` file specifies files Git should ignore.
 
-Write clear commit messages, e.g.:
+**Example .gitignore:**
+```
+# Dependencies
+node_modules/
+vendor/
 
-text Copy code feat: add user login form fix: correct validation for
-email field docs: update README usage section Add a good .gitignore for
-your language/framework.
+# Environment variables
+.env
+.env.local
 
-Don't commit large build artifacts and dependencies (use package
-managers).
+# Build outputs
+dist/
+build/
+*.log
 
-Avoid rewriting public history (git push \--force) on shared branches.
+# IDE files
+.vscode/
+.idea/
+*.swp
 
-Use pull requests for review and discussion before merging.
+# OS files
+.DS_Store
+Thumbs.db
 
-Glossary Term Meaning Repository A project tracked by Git, including all
-history and configuration Commit A snapshot of your project at a
-specific moment Branch A movable pointer to a series of commits (a line
-of development) Remote A copy of your repository on another server
-(e.g., GitHub) Fork A copy of someone else's GitHub repo under your own
-account Pull Request Request to merge your changes into another branch
-or repository Clone Create a local copy of a remote repository Push
-Upload local commits to a remote repository Pull Download and merge
-changes from a remote repository Merge Combine changes from different
-branches Conflict When Git cannot automatically merge differences HEAD
-Current branch pointer or specific commit you are on Staging Area Middle
-area where changes are prepared before commit
+# Test coverage
+coverage/
+```
+
+**Tips:**
+- Add .gitignore before first commit
+- Use templates from [gitignore.io](https://www.toptal.com/developers/gitignore)
+- Don't commit sensitive data (API keys, passwords)
+
+### Security Best Practices
+
+1. **Never Commit Secrets**: Use environment variables
+2. **Use SSH Keys**: More secure than HTTPS
+3. **Enable Two-Factor Authentication**: On GitHub
+4. **Review Dependencies**: Check for vulnerabilities
+5. **Use Branch Protection**: Prevent force pushes to main
+6. **Sign Commits**: Use GPG keys for verification
+7. **Audit Access**: Regularly review collaborators
+8. **Keep Git Updated**: Latest version has security fixes
+
+### Performance Tips
+
+1. **Use .gitattributes**: Configure line endings and diff
+2. **Shallow Clone**: For large repositories (`git clone --depth 1`)
+3. **Git LFS**: For large binary files
+4. **Prune Regularly**: Remove outdated references (`git prune`)
+5. **Garbage Collection**: Optimize repository (`git gc`)
+
+---
+
+## Troubleshooting Common Issues
+
+### "Failed to Push" Error
+
+**Problem:** Remote contains commits you don't have locally.
+
+**Solution:**
+```bash
+# Pull and merge
+git pull origin main
+
+# Or pull and rebase
+git pull --rebase origin main
+
+# Then push
+git push origin main
+```
+
+### Merge Conflicts
+
+**Problem:** Git cannot automatically merge changes.
+
+**Solution:**
+1. Open conflicted files
+2. Resolve conflicts manually
+3. Remove conflict markers
+4. Stage files: `git add <file>`
+5. Complete merge: `git commit`
+
+### Accidentally Committed to Wrong Branch
+
+**Solution:**
+```bash
+# Move commit to new branch
+git branch new-branch
+git reset --hard HEAD~1
+git checkout new-branch
+```
+
+### Undo Last Commit
+
+**Keep changes:**
+```bash
+git reset --soft HEAD~1
+```
+
+**Discard changes:**
+```bash
+git reset --hard HEAD~1
+```
+
+**Create reverse commit:**
+```bash
+git revert HEAD
+```
+
+### Remove Sensitive Data from History
+
+**Solution (use with caution):**
+```bash
+# Using filter-branch (older method)
+git filter-branch --force --index-filter \
+  "git rm --cached --ignore-unmatch path/to/file" \
+  --prune-empty --tag-name-filter cat -- --all
+
+# Using BFG Repo-Cleaner (recommended)
+bfg --delete-files sensitive-file.txt
+git reflog expire --expire=now --all
+git gc --prune=now --aggressive
+```
+
+**Then force push:**
+```bash
+git push origin --force --all
+```
+
+### Detached HEAD State
+
+**Problem:** HEAD is not pointing to a branch tip.
+
+**Solution:**
+```bash
+# Create branch from current position
+git checkout -b new-branch-name
+
+# Or return to branch
+git checkout main
+```
+
+### Permission Denied (SSH)
+
+**Problem:** SSH key not configured or recognized.
+
+**Solution:**
+```bash
+# Test SSH connection
+ssh -T git@github.com
+
+# Check SSH key
+cat ~/.ssh/id_ed25519.pub
+
+# Add key to ssh-agent
+ssh-add ~/.ssh/id_ed25519
+```
+
+### Large File Error
+
+**Problem:** File exceeds GitHub's 100MB limit.
+
+**Solution:**
+```bash
+# Use Git LFS
+git lfs install
+git lfs track "*.psd"
+git add .gitattributes
+git add large-file.psd
+git commit -m "Add large file with LFS"
+```
+
+---
+
+## Advanced Git Topics
+
+### Git Hooks
+
+Hooks are scripts that run automatically at certain points in the Git workflow.
+
+**Common Hooks:**
+- `pre-commit`: Run before commit is created
+- `prepare-commit-msg`: Modify commit message template
+- `commit-msg`: Validate commit message
+- `pre-push`: Run before push
+- `post-merge`: Run after successful merge
+
+**Example pre-commit hook (.git/hooks/pre-commit):**
+```bash
+#!/bin/sh
+# Run tests before commit
+npm test
+```
+
+### Git Submodules
+
+Include other Git repositories within your repository.
+
+```bash
+# Add submodule
+git submodule add https://github.com/user/repo.git path/to/submodule
+
+# Clone repository with submodules
+git clone --recursive https://github.com/user/repo.git
+
+# Update submodules
+git submodule update --remote
+
+# Remove submodule
+git submodule deinit path/to/submodule
+git rm path/to/submodule
+```
+
+### Git Worktrees
+
+Work on multiple branches simultaneously.
+
+```bash
+# Create worktree
+git worktree add ../project-feature feature-branch
+
+# List worktrees
+git worktree list
+
+# Remove worktree
+git worktree remove ../project-feature
+```
+
+### Cherry-Picking
+
+Apply specific commits from one branch to another.
+
+```bash
+# Cherry-pick single commit
+git cherry-pick <commit-hash>
+
+# Cherry-pick range
+git cherry-pick <start-hash>..<end-hash>
+
+# Cherry-pick without committing
+git cherry-pick -n <commit-hash>
+```
+
+### Bisect
+
+Find which commit introduced a bug using binary search.
+
+```bash
+# Start bisect
+git bisect start
+
+# Mark current commit as bad
+git bisect bad
+
+# Mark known good commit
+git bisect good <commit-hash>
+
+# Git will checkout middle commit - test it
+# Then mark as good or bad
+git bisect good  # or git bisect bad
+
+# Repeat until bug is found
+# Reset when done
+git bisect reset
+```
+
+### Reflog
+
+Recovery tool that records when branch tips are updated.
+
+```bash
+# View reflog
+git reflog
+
+# Recover lost commit
+git checkout <commit-hash>
+git checkout -b recovered-branch
+
+# Undo reset
+git reset 'HEAD@{1}'
+```
+
+### Advanced Merging
+
+**Merge with Custom Strategy:**
+```bash
+# Use ours strategy
+git merge -X ours branch-name
+
+# Use theirs strategy
+git merge -X theirs branch-name
+```
+
+**Rerere (Reuse Recorded Resolution):**
+```bash
+# Enable rerere
+git config --global rerere.enabled true
+
+# Git will remember conflict resolutions
+```
+
+### Git Attributes
+
+Configure behavior per path using `.gitattributes`.
+
+```
+# Set line endings
+*.txt text eol=lf
+*.sh text eol=lf
+*.bat text eol=crlf
+
+# Mark files as binary
+*.png binary
+*.jpg binary
+
+# Custom diff for specific files
+*.md diff=markdown
+
+# Git LFS
+*.psd filter=lfs diff=lfs merge=lfs -text
+```
+
+---
+
+## Conclusion
+
+Git and GitHub are powerful tools that have revolutionized software development and collaboration. This guide covered:
+
+- **Git Fundamentals**: Version control concepts, repositories, commits, and branches
+- **GitHub Platform**: Cloud hosting, collaboration features, and project management
+- **Practical Commands**: Everyday Git operations and workflows
+- **Best Practices**: Professional development standards and conventions
+- **Advanced Topics**: Hooks, submodules, bisect, and recovery techniques
+- **Troubleshooting**: Common issues and their solutions
+
+### Continuing Your Learning
+
+**Resources:**
+- [Official Git Documentation](https://git-scm.com/doc)
+- [GitHub Guides](https://guides.github.com/)
+- [Pro Git Book](https://git-scm.com/book) (free online)
+- [GitHub Learning Lab](https://lab.github.com/)
+- [Git Cheat Sheet](https://education.github.com/git-cheat-sheet-education.pdf)
+
+**Practice:**
+- Contribute to open-source projects
+- Create personal projects on GitHub
+- Practice different workflows
+- Experiment with advanced features
+- Join developer communities
+
+### Final Tips
+
+1. **Start Simple**: Master basics before advancing
+2. **Practice Regularly**: Use Git for all projects
+3. **Read Commit History**: Learn from others
+4. **Don't Fear Mistakes**: Git can recover most things
+5. **Ask Questions**: Developer communities are helpful
+6. **Stay Updated**: Git evolves with new features
+7. **Document Your Work**: Good README files matter
+8. **Collaborate Often**: Best way to learn
+
+Remember, becoming proficient with Git and GitHub takes time and practice. Don't be discouraged by mistakes—they're part of the learning process. The more you use these tools, the more natural they'll become.
+
+Happy coding and version controlling!
